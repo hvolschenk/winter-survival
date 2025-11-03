@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "compile": "tailwindcss -i ./resources/css/app.css -o ./public/styles/app-compiled.css",
+		"compile:watch": "tailwindcss -i ./resources/css/app.css -o ./public/styles/app-compiled.css --watch"
+    },
+    "devDependencies": {
+		"@tailwindcss/cli": "^4.1.16",
+		"@tailwindcss/postcss": "^4.1.16",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^4.1.16"
+	}
+}

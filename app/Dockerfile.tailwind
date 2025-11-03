@@ -1,0 +1,20 @@
+FROM node:lts-alpine
+
+# The home directory for the `node` user
+ENV HOME /home/node
+
+# Swap to the provided non-root user, `node`
+USER node
+
+# Install dependencies
+RUN mkdir -p $HOME/app
+RUN mkdir -p $HOME/app/.npm
+WORKDIR $HOME/app
+COPY --chown=node:node package.json package-lock.json* ./
+RUN npm install
+
+# Copy application source code into the container
+COPY --chown=node:node ./public ./public/
+COPY --chown=node:node ./resources ./resources/
+
+CMD npm run compile:watch
