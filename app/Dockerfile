@@ -6,6 +6,7 @@ RUN apk update && \
     freetype freetype-dev \
     g++ \
     git \
+    gmp-dev \
     libjpeg-turbo libjpeg-turbo-dev \
     imagemagick-dev \
     libpng libpng-dev \
@@ -17,7 +18,7 @@ RUN pecl install imagick
 
 RUN docker-php-ext-enable imagick
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp
-RUN docker-php-ext-install exif gd pdo pdo_mysql
+RUN docker-php-ext-install bcmath exif gd gmp pdo pdo_mysql
 
 COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
 
