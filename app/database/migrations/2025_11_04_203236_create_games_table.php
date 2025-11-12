@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->tinyInteger('difficulty', false, true)->default(1);
+            $table->unsignedTinyInteger('difficulty')->default(1);
             $table->string('hash')->nullable()->unique();
-            $table->bigInteger('turn', false, true)->default(1);
+            $table->unsignedBigInteger('turn')->default(1);
             $table->softDeletes();
         });
     }
