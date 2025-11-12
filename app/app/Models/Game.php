@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Game extends Model
 {
+    /** @use HasFactory<\Database\Factories\GameFactory> */
     use HasFactory, SoftDeletes;
 
     /**
