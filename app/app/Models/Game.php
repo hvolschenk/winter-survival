@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Game extends Model
@@ -37,4 +38,14 @@ class Game extends Model
      * @var list<string>
      */
     protected $hidden = [];
+
+    /**
+     * The character for this playthrough
+     *
+     * @return HasOne<\App\Models\Character>
+     */
+    public function character(): HasOne
+    {
+        return $this->hasOne(Character::class);
+    }
 }
