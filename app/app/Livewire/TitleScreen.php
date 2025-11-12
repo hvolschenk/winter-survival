@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Character;
 use App\Models\Game;
 use Livewire\Component;
 
@@ -64,9 +65,11 @@ class TitleScreen extends Component
         $validated = $this->validate([
             'difficulty' => 'required|numeric:strict|between:0,9',
         ]);
-        $game = Game::factory()->create([
-            'difficulty' => $validated['difficulty'],
-        ]);
+        $game = Game::factory()
+            ->has(Character::factory())
+            ->create([
+                'difficulty' => $validated['difficulty'],
+            ]);
         return redirect(route('game', $game));
     }
 
