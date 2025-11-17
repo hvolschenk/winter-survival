@@ -60,6 +60,8 @@ class TitleScreen extends Component
 
     /**
      * Create a new game
+     *
+     * @return void
      */
     public function onGameCreate()
     {
