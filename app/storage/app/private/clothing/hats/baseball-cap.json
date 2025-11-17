@@ -1,0 +1,9 @@
+{
+    "armor": 0,
+    "condition": 100,
+    "l10n_name": "clothing.hats__baseball-cap__name",
+    "l10n_description": "clothing.hats__baseball-cap__description",
+    "type": "hat",
+    "warmth_celcius": 1,
+    "wind_protection_celcius": 1
+}

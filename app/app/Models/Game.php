@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Character;
+use App\Models\Settings;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -18,7 +20,6 @@ class Game extends Model
      * @var array
      */
     protected $attributes = [
-        'difficulty' => 1,
         'turn' => 1,
     ];
 
@@ -28,7 +29,6 @@ class Game extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'difficulty',
         'hash',
     ];
 
@@ -47,5 +47,15 @@ class Game extends Model
     public function character(): HasOne
     {
         return $this->hasOne(Character::class);
+    }
+
+    /**
+     * The character for this playthrough
+     *
+     * @return HasOne<\App\Models\Settings>
+     */
+    public function settings(): HasOne
+    {
+        return $this->hasOne(Settings::class);
     }
 }

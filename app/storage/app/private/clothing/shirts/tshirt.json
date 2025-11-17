@@ -1,0 +1,9 @@
+{
+    "armor": 0,
+    "condition": 100,
+    "l10n_name": "clothing.shirts__tshirt__name",
+    "l10n_description": "clothing.shirts__tshirt__description",
+    "type": "shirt",
+    "warmth_celcius": 1,
+    "wind_protection_celcius": 0
+}

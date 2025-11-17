@@ -8,10 +8,10 @@ return [
     // The difficulty of the game
     'difficulty' => 'Moeilikheidsgraad',
     // The varying degrees of difficulty
-    'difficulty--0' => 'Maklik',
-    'difficulty--1' => 'Gemiddeld',
-    'difficulty--2' => 'Moeilik',
-    'difficulty--3' => 'Brutaal',
+    'difficulty--easy' => 'Maklik',
+    'difficulty--medium' => 'Gemiddeld',
+    'difficulty--hard' => 'Moeilik',
+    'difficulty--brutal' => 'Brutaal',
     // The ID (hash) of the game
     'id' => 'Spel ID',
 ];

@@ -1,0 +1,9 @@
+{
+    "armor": 1,
+    "condition": 100,
+    "l10n_name": "clothing.jackets__leather-jacket__name",
+    "l10n_description": "clothing.jackets__leather-jacket__description",
+    "type": "jacket",
+    "warmth_celcius": 3,
+    "wind_protection_celcius": 5
+}

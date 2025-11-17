@@ -32,7 +32,6 @@ class GameFactory extends Factory
     public function definition(): array
     {
         return [
-            'difficulty' => 1,
             'turn' => 1,
         ];
     }
