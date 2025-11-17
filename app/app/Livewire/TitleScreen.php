@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Character;
+use App\Enums\Difficulty;
 use App\Models\Game;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class TitleScreen extends Component
@@ -11,9 +13,9 @@ class TitleScreen extends Component
     /**
      * The `Difficulty` form field value, used when creating a new game.
      *
-     * @var int
+     * @var string
      */
-    public int $difficulty = 1;
+    public string $difficulty = Difficulty::Medium->value;
 
     /**
      * The `Game ID` form field value, used when loading a game.
@@ -63,7 +65,10 @@ class TitleScreen extends Component
     {
         $this->authorize('create', Game::class);
         $validated = $this->validate([
-            'difficulty' => 'required|numeric:strict|between:0,9',
+            'difficulty' => [
+                'required',
+                Rule::enum(Difficulty::class),
+            ],
         ]);
         $game = Game::factory()
             ->has(Character::factory())

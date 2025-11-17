@@ -5,11 +5,19 @@
     @if ($isCreateFormShown)
         <form wire:submit="onGameCreate">
             <label for="difficulty">{{ __('game.difficulty') }}</label>
-            <select value="1" wire:model.number="difficulty">
-                <option value="0">{{ __('game.difficulty--0') }}</option>
-                <option value="1">{{ __('game.difficulty--1') }}</option>
-                <option value="2">{{ __('game.difficulty--2') }}</option>
-                <option value="3">{{ __('game.difficulty--3') }}</option>
+            <select
+                id="difficulty"
+                value="{{ App\Enums\Difficulty::Medium->value }}"
+                wire:model="difficulty"
+            >
+                @foreach(App\Enums\Difficulty::cases() as $difficulty)
+                    <option
+                        @selected($difficulty == App\Enums\Difficulty::Medium)
+                        value="{{ $difficulty->value }}"
+                    >
+                        {{ __("game.difficulty--$difficulty->value") }}
+                    </option>
+                @endforeach
             </select>
             @error('difficulty')
                 <span>{{ $message }}</span>

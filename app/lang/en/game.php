@@ -8,10 +8,10 @@ return [
     // The difficulty of the game
     'difficulty' => 'Difficulty',
     // The varying degrees of difficulty
-    'difficulty--0' => 'Easy',
-    'difficulty--1' => 'Medium',
-    'difficulty--2' => 'Hard',
-    'difficulty--3' => 'Brutal',
+    'difficulty--easy' => 'Easy',
+    'difficulty--medium' => 'Medium',
+    'difficulty--hard' => 'Hard',
+    'difficulty--brutal' => 'Brutal',
     // The ID (hash) of the game
     'id' => 'Game ID',
 ];
