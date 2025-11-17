@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Models\Game;
+use App\Models\Loadout;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Character extends Model
@@ -56,5 +58,15 @@ class Character extends Model
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
+    }
+
+    /**
+     * The characters loadouts
+     *
+     * @return HasMany<\App\Models\Loadout>
+     */
+    public function loadouts(): HasMany
+    {
+        return $this->hasMany(Loadout::class);
     }
 }

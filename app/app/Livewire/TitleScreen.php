@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Character;
 use App\Enums\Difficulty;
 use App\Models\Game;
+use App\Services\NewGameService;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -72,11 +72,8 @@ class TitleScreen extends Component
                 Rule::enum(Difficulty::class),
             ],
         ]);
-        $game = Game::factory()
-            ->has(Character::factory())
-            ->create([
-                'difficulty' => $validated['difficulty'],
-            ]);
+        $newGameService = new NewGameService(Difficulty::from($validated['difficulty']));
+        $game = $newGameService->createNewGame();
         return redirect(route('game', $game));
     }
 
