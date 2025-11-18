@@ -1,8 +1,8 @@
 {
     "armor": 0,
     "condition": 100,
-    "l10n_name": "clothing.pants__jeans__name",
     "l10n_description": "clothing.pants__jeans__description",
+    "l10n_name": "clothing.pants__jeans__name",
     "type": "pants",
     "warmth_celcius": 2,
     "wind_protection_celcius": 1
