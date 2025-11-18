@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Enums\ClothingType;
 use App\Models\Loadout;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Clothing extends Model
+class Backpack extends Model
 {
-    /** @use HasFactory<\Database\Factories\ClothingFactory> */
+    /** @use HasFactory<\Database\Factories\BackpackFactory> */
     use HasFactory, SoftDeletes;
 
     /**
@@ -19,21 +18,14 @@ class Clothing extends Model
      *
      * @var list<string>
      */
-    protected $attributes = [
-        'condition' => 100,
-    ];
+    protected $attributes = [];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'armor',
-        'condition',
-        'warmth_celcius',
-        'wind_protection_celcius',
-    ];
+    protected $fillable = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,18 +35,6 @@ class Clothing extends Model
     protected $hidden = [
         'loadout_id',
     ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'type' => ClothingType::class,
-        ];
-    }
 
     /**
      * The loadout that this clothing belongs to

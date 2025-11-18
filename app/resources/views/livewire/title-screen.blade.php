@@ -8,20 +8,21 @@
             <select
                 id="difficulty"
                 value="{{ App\Enums\Difficulty::Medium->value }}"
-                wire:model="difficulty"
+                wire:model.live="difficulty"
             >
-                @foreach(App\Enums\Difficulty::cases() as $difficulty)
+                @foreach(App\Enums\Difficulty::cases() as $difficultySetting)
                     <option
-                        @selected($difficulty == App\Enums\Difficulty::Medium)
-                        value="{{ $difficulty->value }}"
+                        @selected($difficultySetting == App\Enums\Difficulty::Medium)
+                        value="{{ $difficultySetting->value }}"
                     >
-                        {{ __("game.difficulty--$difficulty->value") }}
+                        {{ __("settings.difficulty__{$difficultySetting->value}__name") }}
                     </option>
                 @endforeach
             </select>
             @error('difficulty')
                 <span>{{ $message }}</span>
             @enderror
+            <p>{{ __("settings.difficulty__{$difficulty}__description") }}</p>
             <button type="submit">{{ __('game.action--new') }}</button>
         </form>
     @endif

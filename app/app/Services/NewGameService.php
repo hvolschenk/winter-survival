@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\ClothingType;
 use App\Enums\Difficulty;
+use App\Models\Backpack;
 use App\Models\Character;
 use App\Models\Clothing;
 use App\Models\Game;
@@ -16,9 +17,22 @@ use Illuminate\Support\Facades\Storage;
 
 class NewGameService {
     /**
-     * The list of starter gear available for each difficulty.
+     * The list of starter backpacks avilable for each difficulty.
+     * A single random backpack will be picked from the list.
+     *
+     * @var array
+     */
+    private const STARTER_BACKPACKS = [
+        Difficulty::Easy->value => ['sturdy-backpack.json'],
+        Difficulty::Medium->value => ['school-bag.json'],
+        Difficulty::Hard->value => ['school-bag.json'],
+        Difficulty::Brutal->value => ['sling-bag.json'],
+    ];
+
+    /**
+     * The list of starter clothing available for each difficulty.
      * An array is provided for each slot (each `type` of Clothing),
-     * and a single random item will be picked from the list.
+     * and a single random clothing item will be picked from the list.
      *
      * @var array
      */
@@ -103,10 +117,12 @@ class NewGameService {
      */
     public function createNewGame(): Game
     {
+        $starterBackpack = $this->generateStarterBackpack();
         $starterClothing = $this->generateStarterClothing();
         $game = Game::factory()
             ->has(Character::factory()
                 ->has(Loadout::factory()
+                    ->has(Backpack::factory()->state($starterBackpack))
                     ->has(Clothing::factory()
                         ->count(count($starterClothing))
                         ->state(new Sequence(...$starterClothing)),
@@ -118,6 +134,20 @@ class NewGameService {
             )
             ->create();
         return $game;
+    }
+
+    /**
+     * Generates a starter backpack.
+     * Returns an associative array of backpack model values.
+     *
+     * @return array
+     */
+    private function generateStarterBackpack(): array
+    {
+        $backpacksForDifficulty = $this::STARTER_BACKPACKS[$this->difficulty->value];
+        $backpackIndex = array_rand($backpacksForDifficulty);
+        $filename = 'backpacks/' . $backpacksForDifficulty[$backpackIndex];
+        return $this->readItemFromDisk($filename);
     }
 
     /**
@@ -135,7 +165,7 @@ class NewGameService {
             if (count($filesForClothingType) > 0) {
                 $typeIndex = array_rand($filesForClothingType);
                 $filename = 'clothing/' . $filesForClothingType[$typeIndex];
-                $clothing = $this->readClothingFromDisk($filename);
+                $clothing = $this->readItemFromDisk($filename);
                 array_push($clothingValues, $clothing);
             }
         }
@@ -143,17 +173,17 @@ class NewGameService {
     }
 
     /**
-     * Fetches the clothing preset from disk and returns it as an associative array
+     * Fetches an item preset from disk and returns it as an associative array
      *
-     * @param string $path The path to the clothing definition .json file.
+     * @param string $path The path to an item definition .json file.
      * @return array
-     * @throws Exception When the $path does not contain valid clothing.
+     * @throws Exception When the $path does not contain a valid item.
      */
-    private function readClothingFromDisk(string $path): array
+    private function readItemFromDisk(string $path): array
     {
         $fileContents = $this->localDisk->get($path);
         if (!$fileContents) {
-            throw new Exception("The clothing at $path could not be read");
+            throw new Exception("The item at $path could not be read");
         }
         return json_decode($fileContents, true);
     }
