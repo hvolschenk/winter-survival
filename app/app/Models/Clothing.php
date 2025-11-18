@@ -7,11 +7,12 @@ use App\Models\Loadout;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Clothing extends Model
 {
     /** @use HasFactory<\Database\Factories\ClothingFactory> */
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The model's default values for attributes.
