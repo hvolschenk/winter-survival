@@ -3,8 +3,12 @@
     <strong>Game #{{ $game->hash }}</strong><br /><br />
 
     <strong>Settings:</strong><br />
-    <em>Difficulty</em>: {{ $game->settings->difficulty }}<br />
-    <em>Units</em>: {{ $game->settings->units }}<br /><br />
+    <em>Difficulty</em>:
+    {{ __("settings.difficulty__{$game->settings->difficulty->value}__name") }}
+    <br />
+    <em>Units</em>:
+    {{ __("settings.units__{$game->settings->units->value}__name") }}
+    <br /><br />
 
     <strong>Character:</strong><br />
     <em>Health</em>: {{ $game->character->health }}<br />
