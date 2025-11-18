@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ClothingType;
+use App\Models\Backpack;
 use App\Models\Character;
 use App\Models\Clothing;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,16 @@ class Loadout extends Model
 {
     /** @use HasFactory<\Database\Factories\LoadoutFactory> */
     use HasFactory, SoftDeletes;
+
+    /**
+     * The backpack that the character is carrying
+     *
+     * @return HasOne<\App\Models\Backpack>
+     */
+    public function backpack(): HasOne
+    {
+        return $this->hasOne(Backpack::class);
+    }
 
     /**
      * The character that this loadout belongs to

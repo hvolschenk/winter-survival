@@ -20,6 +20,9 @@
     <strong>Loadouts:</strong><br />
     @foreach ($game->character->loadouts as $loadout)
         <strong>Loadout #{{ $loop->index }}</strong><br />
+        <em>Backpack:</em>: {{ __($loadout->backpack->l10n_name) }}
+        <br />
+
         <em>Gloves</em>:
         @if ($loadout->gloves)
             {{ __($loadout->gloves->l10n_name) }}
