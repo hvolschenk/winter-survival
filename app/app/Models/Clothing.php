@@ -31,9 +31,6 @@ class Clothing extends Model
     protected $fillable = [
         'armor',
         'condition',
-        'l10n_name',
-        'l10n_description',
-        'type',
         'warmth_celcius',
         'wind_protection_celcius',
     ];
