@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('hydration')->default(100);
             $table->unsignedTinyInteger('satiation')->default(100);
             $table->unsignedTinyInteger('stamina')->default(100);
-            $table->foreignIdFor(Game::class);
+            $table->foreignIdFor(Game::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
     }

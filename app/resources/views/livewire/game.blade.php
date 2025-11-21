@@ -75,6 +75,12 @@
         @if ($loadout->underwear)
             {{ __($loadout->underwear->l10n_name) }}
         @endif
-        <br />
+        <br /><br />
     @endforeach
+    <strong>Inventory</strong>:<br />
+    <em>Clothing</em>:<br />
+    @foreach ($game->character->inventory->clothing as $clothingItem)
+        {{ __($clothingItem->l10n_name) }}<br />
+    @endforeach
+    <br />
 </div>

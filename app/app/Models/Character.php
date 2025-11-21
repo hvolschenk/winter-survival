@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use App\Models\Game;
+use App\Models\Inventory;
 use App\Models\Loadout;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Character extends Model
 {
-    /** @use HasFactory<\Database\Factories\CharacterFactory> */
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The model's default values for attributes.
@@ -58,6 +58,16 @@ class Character extends Model
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
+    }
+
+    /**
+     * The character's inventory of all items.
+     *
+     * @return HasOne<\App\Models\Inventory>
+     */
+    public function inventory(): HasOne
+    {
+        return $this->hasOne(Inventory::class);
     }
 
     /**

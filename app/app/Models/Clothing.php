@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use App\Enums\ClothingType;
+use App\Models\Inventory;
 use App\Models\Loadout;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Clothing extends Model
 {
-    /** @use HasFactory<\Database\Factories\ClothingFactory> */
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The model's default values for attributes.
@@ -31,6 +30,9 @@ class Clothing extends Model
     protected $fillable = [
         'armor',
         'condition',
+        'l10n_description',
+        'l10n_name',
+        'type',
         'warmth_celcius',
         'wind_protection_celcius',
     ];
@@ -54,6 +56,16 @@ class Clothing extends Model
         return [
             'type' => ClothingType::class,
         ];
+    }
+
+    /**
+     * The inventory that this clothing is inside of
+     *
+     * @return BelongsTo<\App\Models\Inventory>
+     */
+    public function inventory(): BelongsTo
+    {
+        return $this->belongsTo(Inventory::class);
     }
 
     /**

@@ -6,7 +6,6 @@ use App\Enums\ClothingType;
 use App\Models\Backpack;
 use App\Models\Character;
 use App\Models\Clothing;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,8 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Loadout extends Model
 {
-    /** @use HasFactory<\Database\Factories\LoadoutFactory> */
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The backpack that the character is carrying
