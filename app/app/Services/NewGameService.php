@@ -8,6 +8,7 @@ use App\Models\Backpack;
 use App\Models\Character;
 use App\Models\Clothing;
 use App\Models\Game;
+use App\Models\Inventory;
 use App\Models\Loadout;
 use App\Models\Settings;
 use Exception;
@@ -128,6 +129,9 @@ class NewGameService {
             // The character
             $character = Character::create();
             $game->character()->save($character);
+            // Inventory
+            $inventory = Inventory::create();
+            $character->inventory()->save($inventory);
             // Loadout
             $loadout = Loadout::create();
             $character->loadouts()->save($loadout);
@@ -140,6 +144,7 @@ class NewGameService {
                 $clothingItem = Clothing::create($starterClothingItemData);
                 $clothing->push($clothingItem);
             }
+            $inventory->clothing()->saveMany($clothing->all());
             $loadout->clothing()->saveMany($clothing->all());
             // Settings
             $settings = Settings::create(['difficulty' => $this->difficulty->value]);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ClothingType;
+use App\Models\Inventory;
 use App\Models\Loadout;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -55,6 +56,16 @@ class Clothing extends Model
         return [
             'type' => ClothingType::class,
         ];
+    }
+
+    /**
+     * The inventory that this clothing is inside of
+     *
+     * @return BelongsTo<\App\Models\Inventory>
+     */
+    public function inventory(): BelongsTo
+    {
+        return $this->belongsTo(Inventory::class);
     }
 
     /**

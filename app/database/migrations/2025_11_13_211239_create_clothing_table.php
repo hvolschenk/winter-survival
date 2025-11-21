@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ClothingType;
+use App\Models\Inventory;
 use App\Models\Loadout;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('warmth_celcius');
             $table->unsignedTinyInteger('armor');
             $table->unsignedTinyInteger('wind_protection_celcius');
+            $table->foreignIdFor(Inventory::class)->index()->nullable()->constrained();
             $table->foreignIdFor(Loadout::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
