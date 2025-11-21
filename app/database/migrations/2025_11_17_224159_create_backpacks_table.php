@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('l10n_name');
             $table->string('l10n_description');
             $table->unsignedTinyInteger('capacity');
-            $table->foreignIdFor(Loadout::class)->nullable();
+            $table->foreignIdFor(Loadout::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
     }

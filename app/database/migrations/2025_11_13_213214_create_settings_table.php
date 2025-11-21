@@ -21,7 +21,7 @@ return new class extends Migration
                 ->default(Difficulty::Medium->value);
             $table->enum('units', array_column(Units::cases(), 'value'))
                 ->default(Units::Metric->value);
-            $table->foreignIdFor(Game::class);
+            $table->foreignIdFor(Game::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
     }

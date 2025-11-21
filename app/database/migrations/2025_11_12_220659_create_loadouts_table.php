@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('loadouts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignIdFor(Character::class);
+            $table->foreignIdFor(Character::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
     }

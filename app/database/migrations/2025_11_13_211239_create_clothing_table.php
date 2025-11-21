@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('warmth_celcius');
             $table->unsignedTinyInteger('armor');
             $table->unsignedTinyInteger('wind_protection_celcius');
-            $table->foreignIdFor(Loadout::class)->nullable();
+            $table->foreignIdFor(Loadout::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
     }
