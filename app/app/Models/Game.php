@@ -4,15 +4,13 @@ namespace App\Models;
 
 use App\Models\Character;
 use App\Models\Settings;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Game extends Model
 {
-    /** @use HasFactory<\Database\Factories\GameFactory> */
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The model's default values for attributes.

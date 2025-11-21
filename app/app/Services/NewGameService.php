@@ -12,8 +12,9 @@ use App\Models\Loadout;
 use App\Models\Settings;
 use Exception;
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Sqids\Sqids;
 
 class NewGameService {
     /**
@@ -117,23 +118,34 @@ class NewGameService {
      */
     public function createNewGame(): Game
     {
-        $starterBackpack = $this->generateStarterBackpack();
-        $starterClothing = $this->generateStarterClothing();
-        $game = Game::factory()
-            ->has(Character::factory()
-                ->has(Loadout::factory()
-                    ->has(Backpack::factory()->state($starterBackpack))
-                    ->has(Clothing::factory()
-                        ->count(count($starterClothing))
-                        ->state(new Sequence(...$starterClothing)),
-                    ),
-                ),
-            )
-            ->has(Settings::factory()
-                ->state(['difficulty' => $this->difficulty->value])
-            )
-            ->create();
-        return $game;
+        return DB::transaction(function () {
+            // The game
+            $game = Game::create();
+            $sqids = new Sqids(minLength: 8);
+            $hash = $sqids->encode([$game->id]);
+            $game->hash = $hash;
+            $game->save();
+            // The character
+            $character = Character::create();
+            $game->character()->save($character);
+            // Loadout
+            $loadout = Loadout::create();
+            $character->loadouts()->save($loadout);
+            // Backpack
+            $backpack = Backpack::create($this->generateStarterBackpack());
+            $loadout->backpack()->save($backpack);
+            // Clothing
+            $clothing = collect();
+            foreach ($this->generateStarterClothing() as $starterClothingItemData) {
+                $clothingItem = Clothing::create($starterClothingItemData);
+                $clothing->push($clothingItem);
+            }
+            $loadout->clothing()->saveMany($clothing->all());
+            // Settings
+            $settings = Settings::create(['difficulty' => $this->difficulty->value]);
+            $game->settings()->save($settings);
+            return $game;
+        });
     }
 
     /**

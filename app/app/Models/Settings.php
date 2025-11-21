@@ -5,15 +5,13 @@ namespace App\Models;
 use App\Enums\Difficulty;
 use App\Enums\Units;
 use App\Models\Game;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Settings extends Model
 {
-    /** @use HasFactory<\Database\Factories\SettingsFactory> */
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The model's default values for attributes.

@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use App\Models\Loadout;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Backpack extends Model
 {
-    /** @use HasFactory<\Database\Factories\BackpackFactory> */
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The model's default values for attributes.
@@ -25,7 +23,11 @@ class Backpack extends Model
      *
      * @var list<string>
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'capacity',
+        'l10n_description',
+        'l10n_name',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
