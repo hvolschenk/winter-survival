@@ -11,6 +11,7 @@
     <br /><br />
 
     <strong>Character:</strong><br />
+    <em>Energy</em>: {{ $game->character->energy }}<br />
     <em>Health</em>: {{ $game->character->health }}<br />
     <em>Heat</em>: {{ $game->character->heat }}<br />
     <em>Hydration</em>: {{ $game->character->hydration }}<br />
@@ -81,6 +82,10 @@
     <em>Clothing</em>:<br />
     @foreach ($game->character->inventory->clothing as $clothingItem)
         {{ __($clothingItem->l10n_name) }}<br />
+    @endforeach
+    <em>Food</em>:<br />
+    @foreach ($game->character->inventory->food as $foodItem)
+        {{ __($foodItem->l10n_name) }}<br />
     @endforeach
     <br />
 </div>

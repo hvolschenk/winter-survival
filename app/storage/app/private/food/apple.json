@@ -1,0 +1,9 @@
+{
+    "condition": 100,
+    "energy": 0,
+    "hydration": 0,
+    "l10n_description": "food.apple__description",
+    "l10n_name": "food.apple__name",
+    "satiation": 10,
+    "stamina": 0
+}

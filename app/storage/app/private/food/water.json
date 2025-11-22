@@ -1,0 +1,9 @@
+{
+    "condition": 100,
+    "energy": 0,
+    "hydration": 50,
+    "l10n_description": "food.water__description",
+    "l10n_name": "food.water__name",
+    "satiation": 0,
+    "stamina": 0
+}

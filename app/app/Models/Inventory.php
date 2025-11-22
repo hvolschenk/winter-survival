@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Character;
 use App\Models\Clothing;
+use App\Models\Food;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -54,5 +55,15 @@ class Inventory extends Model
     public function clothing(): HasMany
     {
         return $this->hasMany(Clothing::class);
+    }
+
+    /**
+     * The food in the character's inventory
+     *
+     * @return HasMany<\App\Models\Food>
+     */
+    public function food(): HasMany
+    {
+        return $this->hasMany(Food::class);
     }
 }

@@ -21,6 +21,7 @@ class Character extends Model
      * @var list<string>
      */
     protected $attributes = [
+        'energy' => 100,
         'health' => 100,
         'heat' => 100,
         'hydration' => 100,
@@ -34,6 +35,7 @@ class Character extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'energy',
         'health',
         'heat',
         'hydration',

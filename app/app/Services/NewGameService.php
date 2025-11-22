@@ -7,6 +7,7 @@ use App\Enums\Difficulty;
 use App\Models\Backpack;
 use App\Models\Character;
 use App\Models\Clothing;
+use App\Models\Food;
 use App\Models\Game;
 use App\Models\Inventory;
 use App\Models\Loadout;
@@ -86,6 +87,32 @@ class NewGameService {
     ];
 
     /**
+     * The list of starter food avilable for each difficulty.
+     * Each difficulty contains a list of guaranteed items,
+     * and a list of possible items.
+     *
+     * @var array
+     */
+    private const STARTER_FOOD = [
+        Difficulty::Easy->value => [
+            'guaranteed' => ['water.json'],
+            'possible' => ['apple.json', 'energy-bar.json'],
+        ],
+        Difficulty::Medium->value => [
+            'guaranteed' => ['water.json'],
+            'possible' => ['apple.json'],
+        ],
+        Difficulty::Hard->value => [
+            'guaranteed' => ['water.json'],
+            'possible' => [],
+        ],
+        Difficulty::Brutal->value => [
+            'guaranteed' => [],
+            'possible' => [],
+        ],
+    ];
+
+    /**
      * The game difficulty chosen by the player.
      *
      * @var Difficulty
@@ -146,6 +173,13 @@ class NewGameService {
             }
             $inventory->clothing()->saveMany($clothing->all());
             $loadout->clothing()->saveMany($clothing->all());
+            // Food
+            $food = collect();
+            foreach ($this->generateStarterFood() as $starterFoodItemData) {
+                $foodItem = Food::create($starterFoodItemData);
+                $food->push($foodItem);
+            }
+            $inventory->food()->saveMany($food->all());
             // Settings
             $settings = Settings::create(['difficulty' => $this->difficulty->value]);
             $game->settings()->save($settings);
@@ -187,6 +221,34 @@ class NewGameService {
             }
         }
         return $clothingValues;
+    }
+
+    /**
+     * Generates a list of starter food values.
+     * Each item returned should be an associative array of Food model values.
+     *
+     * @return list<array>
+     */
+    private function generateStarterFood(): array
+    {
+        $foodValues = [];
+        $foodForDifficulty = $this::STARTER_FOOD[$this->difficulty->value];
+        $guaranteedFood = $foodForDifficulty['guaranteed'];
+        if (count($guaranteedFood) > 0) {
+            foreach ($guaranteedFood as $guaranteedFoodFilename) {
+                $filename = 'food/' . $guaranteedFoodFilename;
+                $foodData = $this->readItemFromDisk($filename);
+                array_push($foodValues, $foodData);
+            }
+        }
+        $possibleFood = $foodForDifficulty['possible'];
+        if (count($possibleFood) > 0) {
+            $foodIndex = array_rand($possibleFood);
+            $filename = 'food/' . $possibleFood[$foodIndex];
+            $foodData = $this->readItemFromDisk($filename);
+            array_push($foodValues, $foodData);
+        }
+        return $foodValues;
     }
 
     /**
