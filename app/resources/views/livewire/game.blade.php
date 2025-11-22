@@ -83,5 +83,9 @@
     @foreach ($game->character->inventory->clothing as $clothingItem)
         {{ __($clothingItem->l10n_name) }}<br />
     @endforeach
+    <em>Food</em>:<br />
+    @foreach ($game->character->inventory->food as $foodItem)
+        {{ __($foodItem->l10n_name) }}<br />
+    @endforeach
     <br />
 </div>
