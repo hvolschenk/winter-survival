@@ -43,6 +43,7 @@ class Clothing extends Model
      * @var list<string>
      */
     protected $hidden = [
+        'inventory_id',
         'loadout_id',
     ];
 
