@@ -11,6 +11,7 @@
     <br /><br />
 
     <strong>Character:</strong><br />
+    <em>Energy</em>: {{ $game->character->energy }}<br />
     <em>Health</em>: {{ $game->character->health }}<br />
     <em>Heat</em>: {{ $game->character->heat }}<br />
     <em>Hydration</em>: {{ $game->character->hydration }}<br />

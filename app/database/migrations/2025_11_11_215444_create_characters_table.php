@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedTinyInteger('energy')->default(100);
             $table->unsignedTinyInteger('health')->default(100);
             $table->unsignedTinyInteger('heat')->default(100);
             $table->unsignedTinyInteger('hydration')->default(100);
