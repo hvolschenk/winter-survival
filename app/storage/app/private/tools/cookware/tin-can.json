@@ -1,0 +1,6 @@
+{
+    "condition": 100,
+    "l10n_description": "tools.cookware__tin-can__description",
+    "l10n_name": "tools.cookware__tin-can__name",
+    "type": "cookware"
+}

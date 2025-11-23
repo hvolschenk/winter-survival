@@ -66,4 +66,14 @@ class Inventory extends Model
     {
         return $this->hasMany(Food::class);
     }
+
+    /**
+     * The tools in the character's inventory
+     *
+     * @return HasMany<\App\Models\Tool>
+     */
+    public function tools(): HasMany
+    {
+        return $this->hasMany(Tool::class);
+    }
 }

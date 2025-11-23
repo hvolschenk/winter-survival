@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ToolType;
 use App\Models\Inventory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,16 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('food', function (Blueprint $table) {
+        Schema::create('tools', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('l10n_name');
             $table->string('l10n_description');
             $table->unsignedTinyInteger('condition')->default(100);
-            $table->unsignedTinyInteger('energy')->default(0);
-            $table->unsignedTinyInteger('hydration')->default(0);
-            $table->unsignedTinyInteger('satiation')->default(0);
-            $table->unsignedTinyInteger('stamina')->default(0);
+            $table->enum('type', array_column(ToolType::cases(), 'value'));
             $table->foreignIdFor(Inventory::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('food');
+        Schema::dropIfExists('tools');
     }
 };

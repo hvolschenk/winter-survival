@@ -78,14 +78,39 @@
         @endif
         <br /><br />
     @endforeach
+
     <strong>Inventory</strong>:<br />
+
     <em>Clothing</em>:<br />
-    @foreach ($game->character->inventory->clothing as $clothingItem)
-        {{ __($clothingItem->l10n_name) }}<br />
-    @endforeach
+    @if ($game->character->inventory->clothing->isEmpty())
+        <em>&nbsp;&nbsp;- None -</em><br />
+    @else
+        <ul>
+            @foreach ($game->character->inventory->clothing as $clothingItem)
+                <li>{{ __($clothingItem->l10n_name) }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <em>Food</em>:<br />
-    @foreach ($game->character->inventory->food as $foodItem)
-        {{ __($foodItem->l10n_name) }}<br />
-    @endforeach
-    <br />
+    @if ($game->character->inventory->food->isEmpty())
+        <em>&nbsp;&nbsp;- None -</em><br />
+    @else
+        <ul>
+            @foreach ($game->character->inventory->food as $foodItem)
+                <li>{{ __($foodItem->l10n_name) }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+    <em>Tools</em>:<br />
+    @if ($game->character->inventory->tools->isEmpty())
+        <em>&nbsp;&nbsp;- None -</em><br />
+    @else
+        <ul>
+            @foreach ($game->character->inventory->tools as $tool)
+                <li>{{ __($tool->l10n_name) }}</li>
+            @endforeach
+        </ul>
+    @endif
 </div>
