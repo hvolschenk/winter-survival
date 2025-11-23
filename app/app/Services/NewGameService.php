@@ -88,28 +88,15 @@ class NewGameService {
 
     /**
      * The list of starter food avilable for each difficulty.
-     * Each difficulty contains a list of guaranteed items,
-     * and a list of possible items.
+     * Each difficulty contains a list of guaranteed items.
      *
      * @var array
      */
     private const STARTER_FOOD = [
-        Difficulty::Easy->value => [
-            'guaranteed' => ['water.json'],
-            'possible' => ['apple.json', 'energy-bar.json'],
-        ],
-        Difficulty::Medium->value => [
-            'guaranteed' => ['water.json'],
-            'possible' => ['apple.json'],
-        ],
-        Difficulty::Hard->value => [
-            'guaranteed' => ['water.json'],
-            'possible' => [],
-        ],
-        Difficulty::Brutal->value => [
-            'guaranteed' => [],
-            'possible' => [],
-        ],
+        Difficulty::Easy->value => ['energy-bar.json', 'water.json'],
+        Difficulty::Medium->value => ['apple.json', 'water.json'],
+        Difficulty::Hard->value => ['water.json'],
+        Difficulty::Brutal->value => [],
     ];
 
     /**
@@ -233,20 +220,12 @@ class NewGameService {
     {
         $foodValues = [];
         $foodForDifficulty = $this::STARTER_FOOD[$this->difficulty->value];
-        $guaranteedFood = $foodForDifficulty['guaranteed'];
-        if (count($guaranteedFood) > 0) {
-            foreach ($guaranteedFood as $guaranteedFoodFilename) {
-                $filename = 'food/' . $guaranteedFoodFilename;
+        if (count($foodForDifficulty) > 0) {
+            foreach ($foodForDifficulty as $foodFilename) {
+                $filename = 'food/' . $foodFilename;
                 $foodData = $this->readItemFromDisk($filename);
                 array_push($foodValues, $foodData);
             }
-        }
-        $possibleFood = $foodForDifficulty['possible'];
-        if (count($possibleFood) > 0) {
-            $foodIndex = array_rand($possibleFood);
-            $filename = 'food/' . $possibleFood[$foodIndex];
-            $foodData = $this->readItemFromDisk($filename);
-            array_push($foodValues, $foodData);
         }
         return $foodValues;
     }

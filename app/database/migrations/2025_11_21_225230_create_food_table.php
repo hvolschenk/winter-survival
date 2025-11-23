@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('l10n_name');
+            $table->string('l10n_description');
             $table->unsignedTinyInteger('condition')->default(100);
             $table->unsignedTinyInteger('energy')->default(0);
             $table->unsignedTinyInteger('hydration')->default(0);
-            $table->string('l10n_name');
-            $table->string('l10n_description');
             $table->unsignedTinyInteger('satiation')->default(0);
             $table->unsignedTinyInteger('stamina')->default(0);
             $table->foreignIdFor(Inventory::class)->index()->nullable()->constrained();
