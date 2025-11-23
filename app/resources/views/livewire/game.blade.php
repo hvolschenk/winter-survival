@@ -102,4 +102,15 @@
             @endforeach
         </ul>
     @endif
+
+    <em>Tools</em>:<br />
+    @if ($game->character->inventory->tools->isEmpty())
+        <em>&nbsp;&nbsp;- None -</em><br />
+    @else
+        <ul>
+            @foreach ($game->character->inventory->tools as $tool)
+                <li>{{ __($tool->l10n_name) }}</li>
+            @endforeach
+        </ul>
+    @endif
 </div>

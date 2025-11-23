@@ -12,6 +12,7 @@ use App\Models\Game;
 use App\Models\Inventory;
 use App\Models\Loadout;
 use App\Models\Settings;
+use App\Models\Tool;
 use Exception;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
@@ -100,6 +101,19 @@ class NewGameService {
     ];
 
     /**
+     * The list of starter tools avilable for each difficulty.
+     * Each difficulty contains a list of guaranteed items.
+     *
+     * @var array
+     */
+    private const STARTER_TOOLS = [
+        Difficulty::Easy->value => ['cookware/tin-can.json'],
+        Difficulty::Medium->value => ['cookware/tin-can.json'],
+        Difficulty::Hard->value => ['cookware/tin-can.json'],
+        Difficulty::Brutal->value => [],
+    ];
+
+    /**
      * The game difficulty chosen by the player.
      *
      * @var Difficulty
@@ -167,6 +181,13 @@ class NewGameService {
                 $food->push($foodItem);
             }
             $inventory->food()->saveMany($food->all());
+            // Tools
+            $tools = collect();
+            foreach ($this->generateStarterTools() as $starterToolData) {
+                $tool = Tool::create($starterToolData);
+                $tools->push($tool);
+            }
+            $inventory->tools()->saveMany($tools->all());
             // Settings
             $settings = Settings::create(['difficulty' => $this->difficulty->value]);
             $game->settings()->save($settings);
@@ -228,6 +249,26 @@ class NewGameService {
             }
         }
         return $foodValues;
+    }
+
+    /**
+     * Generates a list of starter tool values.
+     * Each item returned should be an associative array of Tool model values.
+     *
+     * @return list<array>
+     */
+    private function generateStarterTools(): array
+    {
+        $toolValues = [];
+        $toolsForDifficulty = $this::STARTER_TOOLS[$this->difficulty->value];
+        if (count($toolsForDifficulty) > 0) {
+            foreach ($toolsForDifficulty as $toolFilename) {
+                $filename = 'tools/' . $toolFilename;
+                $toolData = $this->readItemFromDisk($filename);
+                array_push($toolValues, $toolData);
+            }
+        }
+        return $toolValues;
     }
 
     /**
