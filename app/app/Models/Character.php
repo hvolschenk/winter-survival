@@ -81,4 +81,14 @@ class Character extends Model
     {
         return $this->hasMany(Loadout::class);
     }
+
+    /**
+     * The character's list of skills and experience.
+     *
+     * @return HasOne<\App\Models\Skills>
+     */
+    public function skills(): HasOne
+    {
+        return $this->hasOne(Skills::class);
+    }
 }

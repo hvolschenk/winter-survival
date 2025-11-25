@@ -18,6 +18,27 @@
     <em>Satiation</em>: {{ $game->character->satiation }}<br />
     <em>Stamina</em>: {{ $game->character->stamina }}<br /><br />
 
+    <strong>Skills:</strong><br />
+    <em>Bow</em>:&nbsp;
+    {{ $game->character->skills->bow_level }}&nbsp;
+    ({{ $game->character->skills->bow_experience }}XP)<br />
+    <em>Cooking</em>:&nbsp;
+    {{ $game->character->skills->cooking_level }}&nbsp;
+    ({{ $game->character->skills->cooking_experience }}XP)<br />
+    <em>Firearm</em>:&nbsp;
+    {{ $game->character->skills->firearm_level }}&nbsp;
+    ({{ $game->character->skills->firearm_experience }}XP)<br />
+    <em>Fire starting</em>:&nbsp;
+    {{ $game->character->skills->fire_starting_level }}&nbsp;
+    ({{ $game->character->skills->fire_starting_experience }}XP)<br />
+    <em>Fishing</em>:&nbsp;
+    {{ $game->character->skills->fishing_level }}&nbsp;
+    ({{ $game->character->skills->fishing_experience }}XP)<br />
+    <em>Tailoring</em>:&nbsp;
+    {{ $game->character->skills->tailoring_level }}&nbsp;
+    ({{ $game->character->skills->tailoring_experience }}XP)<br />
+    <br />
+
     <strong>Loadouts:</strong><br />
     @foreach ($game->character->loadouts as $loadout)
         <strong>Loadout #{{ $loop->index }}</strong><br />

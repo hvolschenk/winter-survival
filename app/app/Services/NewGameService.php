@@ -12,6 +12,7 @@ use App\Models\Game;
 use App\Models\Inventory;
 use App\Models\Loadout;
 use App\Models\Settings;
+use App\Models\Skills;
 use App\Models\Tool;
 use Exception;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -163,6 +164,9 @@ class NewGameService {
             // Loadout
             $loadout = Loadout::create();
             $character->loadouts()->save($loadout);
+            // Skills
+            $skills = Skills::create();
+            $character->skills()->save($skills);
             // Backpack
             $backpack = Backpack::create($this->generateStarterBackpack());
             $loadout->backpack()->save($backpack);
