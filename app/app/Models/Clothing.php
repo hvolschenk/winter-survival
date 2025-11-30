@@ -34,6 +34,7 @@ class Clothing extends Model
         'l10n_name',
         'type',
         'warmth_celcius',
+        'weight_grams',
         'wind_protection_celcius',
     ];
 

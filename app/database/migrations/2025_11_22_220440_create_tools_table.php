@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('l10n_description');
             $table->unsignedTinyInteger('condition')->default(100);
             $table->enum('type', array_column(ToolType::cases(), 'value'));
+            $table->unsignedSmallInteger('weight_grams');
             $table->foreignIdFor(Inventory::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });

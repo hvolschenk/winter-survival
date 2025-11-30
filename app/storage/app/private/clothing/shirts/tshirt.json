@@ -5,5 +5,6 @@
     "l10n_name": "clothing.shirts__tshirt__name",
     "type": "shirt",
     "warmth_celcius": 1,
+    "weight_grams": 200,
     "wind_protection_celcius": 0
 }

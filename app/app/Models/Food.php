@@ -37,6 +37,7 @@ class Food extends Model
         'l10n_name',
         'satiation',
         'stamina',
+        'weight_grams',
     ];
 
     /**

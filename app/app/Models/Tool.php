@@ -31,6 +31,7 @@ class Tool extends Model
         'l10n_description',
         'l10n_name',
         'type',
+        'weight_grams',
     ];
 
     /**

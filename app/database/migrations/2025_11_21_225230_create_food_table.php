@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('hydration')->default(0);
             $table->unsignedTinyInteger('satiation')->default(0);
             $table->unsignedTinyInteger('stamina')->default(0);
+            $table->unsignedSmallInteger('weight_grams');
             $table->foreignIdFor(Inventory::class)->index()->nullable()->constrained();
             $table->softDeletes();
         });

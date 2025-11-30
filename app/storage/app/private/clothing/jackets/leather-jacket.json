@@ -5,5 +5,6 @@
     "l10n_name": "clothing.jackets__leather-jacket__name",
     "type": "jacket",
     "warmth_celcius": 3,
+    "weight_grams": 1500,
     "wind_protection_celcius": 5
 }
