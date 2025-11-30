@@ -1,0 +1,7 @@
+{
+    "burn_time_turns": 4,
+    "heat_celcius": 20,
+    "l10n_description": "fire.fuel__coal__description",
+    "l10n_name": "fire.fuel__coal__name",
+    "weight_grams": 200
+}

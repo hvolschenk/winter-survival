@@ -1,0 +1,6 @@
+{
+    "l10n_description": "fire.igniter__matches__description",
+    "l10n_name": "fire.igniter__matches__name",
+    "uses_remaining": 20,
+    "weight_grams": 20
+}

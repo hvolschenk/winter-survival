@@ -124,6 +124,17 @@
         </ul>
     @endif
 
+    <em>Igniters</em>:<br />
+    @if ($game->character->inventory->igniters->isEmpty())
+        <em>&nbsp;&nbsp;- None -</em><br />
+    @else
+        <ul>
+            @foreach ($game->character->inventory->igniters as $igniter)
+                <li>{{ __($igniter->l10n_name) }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <em>Tools</em>:<br />
     @if ($game->character->inventory->tools->isEmpty())
         <em>&nbsp;&nbsp;- None -</em><br />

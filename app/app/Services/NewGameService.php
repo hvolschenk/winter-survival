@@ -9,6 +9,7 @@ use App\Models\Character;
 use App\Models\Clothing;
 use App\Models\Food;
 use App\Models\Game;
+use App\Models\Igniter;
 use App\Models\Inventory;
 use App\Models\Loadout;
 use App\Models\Settings;
@@ -102,6 +103,19 @@ class NewGameService {
     ];
 
     /**
+     * The list of starter igniters avilable for each difficulty.
+     * Each difficulty contains a list of guaranteed items.
+     *
+     * @var array
+     */
+    private const STARTER_IGNITERS = [
+        Difficulty::Easy->value => ['lighter.json'],
+        Difficulty::Medium->value => ['matches.json'],
+        Difficulty::Hard->value => [],
+        Difficulty::Brutal->value => [],
+    ];
+
+    /**
      * The list of starter tools avilable for each difficulty.
      * Each difficulty contains a list of guaranteed items.
      *
@@ -185,6 +199,13 @@ class NewGameService {
                 $food->push($foodItem);
             }
             $inventory->food()->saveMany($food->all());
+            // Igniters
+            $igniters = collect();
+            foreach ($this->generateStarterIgniters() as $starterIgniterData) {
+                $igniter = Igniter::create($starterIgniterData);
+                $igniters->push($igniter);
+            }
+            $inventory->igniters()->saveMany($igniters->all());
             // Tools
             $tools = collect();
             foreach ($this->generateStarterTools() as $starterToolData) {
@@ -253,6 +274,26 @@ class NewGameService {
             }
         }
         return $foodValues;
+    }
+
+    /**
+     * Generates a list of starter igniters.
+     * Each item returned should be an associative array of Food model values.
+     *
+     * @return list<array>
+     */
+    private function generateStarterIgniters(): array
+    {
+        $igniterValues = [];
+        $ignitersForDifficulty = $this::STARTER_IGNITERS[$this->difficulty->value];
+        if (count($ignitersForDifficulty) > 0) {
+            foreach ($ignitersForDifficulty as $igniterFilename) {
+                $filename = 'igniters/' . $igniterFilename;
+                $igniterData = $this->readItemFromDisk($filename);
+                array_push($igniterValues, $igniterData);
+            }
+        }
+        return $igniterValues;
     }
 
     /**
