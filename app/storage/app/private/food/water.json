@@ -5,5 +5,6 @@
     "l10n_description": "food.water__description",
     "l10n_name": "food.water__name",
     "satiation": 0,
-    "stamina": 0
+    "stamina": 0,
+    "weight_grams": 1000
 }

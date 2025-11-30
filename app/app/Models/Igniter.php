@@ -2,24 +2,21 @@
 
 namespace App\Models;
 
-use App\Enums\ToolType;
 use App\Models\Inventory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tool extends Model
+class Igniter extends Model
 {
     use SoftDeletes;
 
     /**
      * The model's default values for attributes.
      *
-     * @var array
+     * @var list<string>
      */
-    protected $attributes = [
-        'condition' => 100,
-    ];
+    protected $attributes = [];
 
     /**
      * The attributes that are mass assignable.
@@ -27,10 +24,9 @@ class Tool extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'condition',
         'l10n_description',
         'l10n_name',
-        'type',
+        'uses_remaining',
         'weight_grams',
     ];
 
@@ -42,18 +38,6 @@ class Tool extends Model
     protected $hidden = [
         'inventory_id',
     ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'type' => ToolType::class,
-        ];
-    }
 
     /**
      * The inventory that this food is inside of

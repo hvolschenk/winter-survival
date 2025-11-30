@@ -1,0 +1,7 @@
+{
+    "burn_time_turns": 1,
+    "heat_celcius": 2,
+    "l10n_description": "fire.fuel__stick__description",
+    "l10n_name": "fire.fuel__stick__name",
+    "weight_grams": 100
+}

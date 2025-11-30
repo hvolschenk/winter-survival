@@ -68,6 +68,26 @@ class Inventory extends Model
     }
 
     /**
+     * The fuel sources in the character's inventory
+     *
+     * @return HasMany<\App\Models\Fuel>
+     */
+    public function fuel(): HasMany
+    {
+        return $this->hasMany(Fuel::class);
+    }
+
+    /**
+     * The igniters in the character's inventory
+     *
+     * @return HasMany<\App\Models\Igniter>
+     */
+    public function igniters(): HasMany
+    {
+        return $this->hasMany(Igniter::class);
+    }
+
+    /**
      * The tools in the character's inventory
      *
      * @return HasMany<\App\Models\Tool>

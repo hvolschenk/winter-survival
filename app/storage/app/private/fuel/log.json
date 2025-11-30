@@ -1,0 +1,7 @@
+{
+    "burn_time_turns": 2,
+    "heat_celcius": 5,
+    "l10n_description": "fire.fuel__log__description",
+    "l10n_name": "fire.fuel__log__name",
+    "weight_grams": 1000
+}
