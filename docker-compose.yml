@@ -19,7 +19,7 @@ services:
             - composer.lock
             - bootstrap/cache/
             - logs/
-            - storage/
+            - storage/app/public/
             - vendor/
           path: ./app
           target: /var/www/html
