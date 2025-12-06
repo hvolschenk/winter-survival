@@ -13,4 +13,6 @@ return [
     'id' => 'Spel ID',
     // The title of the "load game" form
     'load-game__title' => 'Laai spel',
+    // The title of the "new game" form
+    'new-game__title' => 'Nuwe spel',
 ];
