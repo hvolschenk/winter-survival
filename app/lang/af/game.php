@@ -15,4 +15,6 @@ return [
     'load-game__title' => 'Laai spel',
     // The title of the "new game" form
     'new-game__title' => 'Nuwe spel',
+    // The label for the current turn in a game
+    'turn' => 'Beurt :turn',
 ];

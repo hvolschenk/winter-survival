@@ -15,4 +15,6 @@ return [
     'load-game__title' => 'Load game',
     // The title of the "new game" form
     'new-game__title' => 'New game',
+    // The label for the current turn in a game
+    'turn' => 'Turn :turn',
 ];

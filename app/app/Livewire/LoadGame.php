@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Game;
+use App\Services\SavedGamesService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
@@ -14,6 +15,21 @@ class LoadGame extends Component
      * @var string
      */
     public string $gameID = '';
+
+    /**
+     * A list of previously created games
+     *
+     * @var Collection<\App\Models\Game>
+     */
+    public Collection $savedGames;
+
+    /**
+     * Accept parameters and initialize the state of the component
+     */
+    public function mount()
+    {
+        $this->savedGames = SavedGamesService::list();
+    }
 
     /**
      * Load a game by its hash by submitting the "Load game" form

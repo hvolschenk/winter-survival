@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Enums\Difficulty;
 use App\Models\Game;
 use App\Services\NewGameService;
+use App\Services\SavedGamesService;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -33,6 +34,7 @@ class NewGame extends Component
         ]);
         $newGameService = new NewGameService(Difficulty::from($validated['difficulty']));
         $game = $newGameService->createNewGame();
+        SavedGamesService::new($game);
         return redirect(route('game', $game));
     }
 
