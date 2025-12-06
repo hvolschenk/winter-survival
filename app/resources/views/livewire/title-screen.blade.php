@@ -27,17 +27,7 @@
         </form>
     @endif
 
-    <button type="button" wire:click="loadFormToggle">
+    <a href="{{ route('load-game') }}">
         {{ __('game.action--load') }}
-    </button>
-    @if ($isLoadFormShown)
-        <form wire:submit="onGameLoad">
-            <label for="gameID">{{ __('game.id') }}</label>
-            <input id="gameID" name="gameID" type="text" wire:model="gameID" />
-            @error('gameID')
-                <span>{{ $message }}</span>
-            @enderror
-            <button type="submit">{{ __('game.action--load') }}</button>
-        </form>
-    @endif
+    </a>
 </div>
