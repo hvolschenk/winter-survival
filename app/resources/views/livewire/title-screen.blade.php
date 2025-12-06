@@ -1,43 +1,18 @@
-<div>
-    <button type="button" wire:click="createFormToggle">
-        {{ __('game.action--new') }}
-    </button>
-    @if ($isCreateFormShown)
-        <form wire:submit="onGameCreate">
-            <label for="difficulty">{{ __('game.difficulty') }}</label>
-            <select
-                id="difficulty"
-                value="{{ App\Enums\Difficulty::Medium->value }}"
-                wire:model.live="difficulty"
-            >
-                @foreach(App\Enums\Difficulty::cases() as $difficultySetting)
-                    <option
-                        @selected($difficultySetting == App\Enums\Difficulty::Medium)
-                        value="{{ $difficultySetting->value }}"
-                    >
-                        {{ __("settings.difficulty__{$difficultySetting->value}__name") }}
-                    </option>
-                @endforeach
-            </select>
-            @error('difficulty')
-                <span>{{ $message }}</span>
-            @enderror
-            <p>{{ __("settings.difficulty__{$difficulty}__description") }}</p>
-            <button type="submit">{{ __('game.action--new') }}</button>
-        </form>
-    @endif
+<div class="container flex h-screen items-center mx-auto">
+    <div class="flex flex-col gap-2 mx-auto mt-8 w-sm">
+        <h1 class="font-bold text-lg uppercase">{{ __('game.name') }}</h1>
+        <a
+            class="border border-neutral-800 cursor-pointer dark:border-neutral-100 drop-shadow-lg hover:bg-neutral-800/10 dark:hover:bg-neutral-100/10 mt-8 px-2 py-1 w-full"
+            href="{{ route('new-game') }}"
+        >
+            {{ __('game.action--new') }}
+        </a>
 
-    <button type="button" wire:click="loadFormToggle">
-        {{ __('game.action--load') }}
-    </button>
-    @if ($isLoadFormShown)
-        <form wire:submit="onGameLoad">
-            <label for="gameID">{{ __('game.id') }}</label>
-            <input id="gameID" name="gameID" type="text" wire:model="gameID" />
-            @error('gameID')
-                <span>{{ $message }}</span>
-            @enderror
-            <button type="submit">{{ __('game.action--load') }}</button>
-        </form>
-    @endif
+        <a
+            class="border border-neutral-800 cursor-pointer dark:border-neutral-100 drop-shadow-lg hover:bg-neutral-800/10 dark:hover:bg-neutral-100/10 mt-8 px-2 py-1 w-full"
+            href="{{ route('load-game') }}"
+        >
+            {{ __('game.action--load') }}
+        </a>
+    </div>
 </div>
