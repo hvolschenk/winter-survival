@@ -13,6 +13,8 @@ return [
     'id' => 'Game ID',
     // The title of the "load game" form
     'load-game__title' => 'Load game',
+    // The name of the game
+    'name' => 'Winter Survival',
     // The title of the "new game" form
     'new-game__title' => 'New game',
     // The label for the current turn in a game

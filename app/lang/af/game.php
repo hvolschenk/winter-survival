@@ -13,6 +13,8 @@ return [
     'id' => 'Spel ID',
     // The title of the "load game" form
     'load-game__title' => 'Laai spel',
+    // The name of the game
+    'name' => 'Winter Survival',
     // The title of the "new game" form
     'new-game__title' => 'Nuwe spel',
     // The label for the current turn in a game
